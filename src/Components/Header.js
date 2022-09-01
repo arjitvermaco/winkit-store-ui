@@ -16,10 +16,10 @@ export default function Header() {
           {/* Buttons Div */}
 
           <div className="inline-flex space-x-4 items-center">
-            <a href="#">Login</a>
+            <a href="#" onClick={()=>{appContext.setLoginOpen(true)}}>Login</a>
             <a
               onClick={()=>{appContext.setCartOpen(true)}}
-              className="bg-winkit-green inline-flex  py-2 px-4 rounded-md text-white"
+              className="bg-winkit-green inline-flex  py-2 px-4 rounded-md text-white hover:cursor-pointer hover:bg-opacity-90 shadow-md"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
