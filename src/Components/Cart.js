@@ -1,14 +1,20 @@
 import { Fragment, useContext, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import AppContext from "../Context/AppContext";
+import ProductCardCart from "./ProductCardCart";
+import BillDetails from "./BillDetails";
 
 export default function Cart() {
   let appContext = useContext(AppContext);
-  
+
   return (
     <Transition.Root show={appContext.cartOpen} as={Fragment}>
-      <Dialog as="div" className="relative z-50" onClose={appContext.setCartOpen}>
-        <div className="fixed inset-0" />
+      <Dialog
+        as="div"
+        className="relative z-50"
+        onClose={appContext.setCartOpen}
+      >
+        <div className="fixed inset-0 bg-black/30" aria-hidden="true" />
 
         <div className="fixed inset-0 overflow-hidden">
           <div className="absolute inset-0 overflow-hidden">
@@ -27,12 +33,12 @@ export default function Cart() {
                     <div className="px-4 sm:px-6">
                       <div className="flex items-start justify-between">
                         <Dialog.Title className="text-lg font-medium text-gray-900">
-                          Panel title
+                          Cart
                         </Dialog.Title>
                         <div className="ml-3 flex h-7 items-center">
                           <button
                             type="button"
-                            className="rounded-md bg-white text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                            className="rounded-md bg-white text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-winkit-green focus:ring-offset-2"
                             onClick={() => appContext.setCartOpen(false)}
                           >
                             <span className="sr-only">Close panel</span>
@@ -56,12 +62,8 @@ export default function Cart() {
                     </div>
                     <div className="relative mt-6 flex-1 px-4 sm:px-6">
                       {/* Replace with your content */}
-                      <div className="absolute inset-0 px-4 sm:px-6">
-                        <div
-                          className="h-full border-2 border-dashed border-gray-200"
-                          aria-hidden="true"
-                        />
-                      </div>
+                        <ProductCardCart/>
+                        <BillDetails/>
                       {/* /End replace */}
                     </div>
                   </div>
