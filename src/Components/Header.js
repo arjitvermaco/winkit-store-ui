@@ -1,4 +1,5 @@
 import React,{useContext} from "react";
+import { Link } from "react-router-dom";
 import winkitLogo from "../assets/images/logo.png";
 import AppContext from '../Context/AppContext';
 export default function Header() {
@@ -10,7 +11,8 @@ export default function Header() {
         <div className="w-full py-3 flex items-center justify-between">
           {/* Logo Div */}
           <div>
-            <img src={winkitLogo} className="h-10 w-auto" />
+            <Link to={"/"}>
+            <img src={winkitLogo} className="h-10 w-auto" /></Link>
           </div>
 
           {/* Buttons Div */}

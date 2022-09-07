@@ -19,30 +19,30 @@ import category17 from "../assets/images/products/winkit/snacks_munchies.png";
 import category18 from "../assets/images/products/winkit/sweet_tooth.png";
 import category19 from "../assets/images/products/winkit/tea_coffee.png";
 import category20 from "../assets/images/products/winkit/breakfast_instant.png";
-
+import {Link} from 'react-router-dom';
 export default function HomeCategories() {
   return (
     <div className="max-w-7xl justify-between mx-auto flex flex-wrap align-baseline mt-12">
-      <img className="w-32" src={category1} />
-      <img className="w-32" src={category2} />
-      <img className="w-32" src={category3} />
-      <img className="w-32" src={category4} />
-      <img className="w-32" src={category5} />
-      <img className="w-32" src={category6} />
-      <img className="w-32" src={category7} />
-      <img className="w-32" src={category8} />
-      <img className="w-32" src={category9} />
-      <img className="w-32" src={category10} />
-      <img className="w-32" src={category11} />
-      <img className="w-32" src={category12} />
-      <img className="w-32" src={category13} />
-      <img className="w-32" src={category14} />
-      <img className="w-32" src={category15} />
-      <img className="w-32" src={category16} />
-      <img className="w-32" src={category17} />
-      <img className="w-32" src={category18} />
-      <img className="w-32" src={category19} />
-      <img className="w-32" src={category20} />
+     <Link to="/category/text"> <img className="w-32" src={category1} /></Link>
+     <Link to="/category/text"> <img className="w-32" src={category2} /></Link>
+     <Link to="/category/text"> <img className="w-32" src={category3} /></Link>
+     <Link to="/category/text"> <img className="w-32" src={category4} /></Link>
+     <Link to="/category/text"> <img className="w-32" src={category5} /></Link>
+     <Link to="/category/text"> <img className="w-32" src={category6} /></Link>
+     <Link to="/category/text"> <img className="w-32" src={category7} /></Link>
+     <Link to="/category/text"> <img className="w-32" src={category8} /></Link>
+     <Link to="/category/text"> <img className="w-32" src={category9} /></Link>
+     <Link to="/category/text"> <img className="w-32" src={category10} /></Link>
+     <Link to="/category/text"> <img className="w-32" src={category11} /></Link>
+     <Link to="/category/text"> <img className="w-32" src={category12} /></Link>
+     <Link to="/category/text"> <img className="w-32" src={category13} /></Link>
+     <Link to="/category/text"> <img className="w-32" src={category14} /></Link>
+     <Link to="/category/text"> <img className="w-32" src={category15} /></Link>
+     <Link to="/category/text"> <img className="w-32" src={category16} /></Link>
+     <Link to="/category/text"> <img className="w-32" src={category17} /></Link>
+     <Link to="/category/text"> <img className="w-32" src={category18} /></Link>
+     <Link to="/category/text"> <img className="w-32" src={category19} /></Link>
+     <Link to="/category/text"> <img className="w-32" src={category20} /></Link>
     </div>
   );
 }

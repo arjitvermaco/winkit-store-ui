@@ -1,8 +1,11 @@
-import React from "react";
+import React, { useEffect } from "react";
 import darkfantasy from "../assets/images/products/winkit/df.png";
 import ProductFooter from "../Components/ProductFooter";
 
 export default function ProductPage() {
+  useEffect(()=>{
+    window.top = 0;
+  })
   return (
     <div className="">
       <div className="max-w-4xl mx-auto mt-12 text-center">
