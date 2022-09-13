@@ -1,10 +1,55 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Dialog } from "@headlessui/react";
 import AppContext from "../Context/AppContext";
+import toast from "react-hot-toast";
+import { auth } from "../firebase";
+import { RecaptchaVerifier, signInWithPhoneNumber } from "firebase/auth";
 
 export default function Login() {
-  let [isOpen, setIsOpen] = useState(true);
+  let [otp, setOtp] = useState("");
+  let [otpSent, setOtpSent] = useState(false);
+  let [phoneNo, setPhoneNo] = useState("");
   let appContext = useContext(AppContext);
+
+  useEffect(() => {
+    console.log(phoneNo);
+  }, [phoneNo]);
+
+  function handleUserLogin() {
+    console.log("User Login CLickd");
+
+    let phoneValidation = CheckIndianNumber(phoneNo);
+    const appVerifier = window.recaptchaVerifier;
+
+    if (phoneValidation) {
+      signInWithPhoneNumber(auth, "+91" + phoneNo, appVerifier)
+        .then((confirmationResult) => {
+          // SMS sent. Prompt user to type the code from the message, then sign the
+          // user in with confirmationResult.confirm(code).
+          window.confirmationResult = confirmationResult;
+          console.log(confirmationResult);
+          // setOtpSent(true);
+          // ...
+        })
+        .catch((error) => {
+          // Error; SMS not sent
+          // ...
+        });
+    } else {
+      //show toaster for invalid phone
+      toast.error("Please enter a valid phone no");
+    }
+  }
+
+  function CheckIndianNumber(b) {
+    var a = /^\d{10}$/;
+    if (a.test(b)) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   return (
     <Dialog
       open={appContext.loginOpen}
@@ -26,7 +71,9 @@ export default function Login() {
               stroke-width="1.5"
               stroke="currentColor"
               class="w-6 h-6"
-              onClick={()=>{appContext.setLoginOpen(false)}}
+              onClick={() => {
+                appContext.setLoginOpen(false);
+              }}
             >
               <path
                 stroke-linecap="round"
@@ -59,23 +106,45 @@ export default function Login() {
                   />
                 </svg>
               </div>
-              <input
-                type="email"
-                name="email"
-                id="email"
-                className="block w-full  border-gray-300 pl-10 focus:border-winkit-green focus:ring-winkit-green sm:text-sm"
-                placeholder="9876543210"
-              />
-              
+
+              {!otpSent ? (
+                <input
+                  type="email"
+                  name="email"
+                  id="email"
+                  value={phoneNo}
+                  onChange={(e) => {
+                    setPhoneNo(e.target.value);
+                  }}
+                  maxlength="10"
+                  className="block w-full  border-gray-300 pl-10 focus:border-winkit-green focus:ring-winkit-green sm:text-sm"
+                  placeholder="9876543210"
+                />
+              ) : (
+                <input
+                  type="email"
+                  name="email"
+                  id="email"
+                  value={otp}
+                  onChange={(e) => {
+                    setOtp(e.target.value);
+                  }}
+                  maxlength="10"
+                  className="block w-full  border-gray-300 pl-10 focus:border-winkit-green focus:ring-winkit-green sm:text-sm"
+                  placeholder="Enter Your OTP"
+                />
+              )}
             </div>
             <button
-                type="button"
-                className="mt-4 w-full text-center justify-center  inline-flex items-center rounded-sm border border-transparent bg-winkit-green px-4 py-1 text-base font-medium text-white shadow-sm hover:bg-opacity-90 focus:outline-none focus:ring-2 focus:ring-winkit-green focus:ring-offset-2"
-              >
-               Send OTP
-              </button>
+              type="button"
+              onClick={() => {
+                handleUserLogin();
+              }}
+              className="mt-4 w-full text-center justify-center  inline-flex items-center rounded-sm border border-transparent bg-winkit-green px-4 py-1 text-base font-medium text-white shadow-sm hover:bg-opacity-90 focus:outline-none focus:ring-2 focus:ring-winkit-green focus:ring-offset-2"
+            >
+              Send OTP
+            </button>
           </div>
-    
         </div>
       </div>
     </Dialog>

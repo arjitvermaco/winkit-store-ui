@@ -8,13 +8,25 @@ import SingleCategoryPage from './Pages/SingleCategoryPage'
 import ProductPage from "./Pages/ProductPage";
 import CheckoutPage from "./Pages/CheckoutPage";
 import AccountPage from "./Pages/AccountPage";
-
+import {Toaster} from 'react-hot-toast'
+import { useEffect } from "react";
+import { RecaptchaVerifier } from "firebase/auth";
+import { auth } from "./firebase";
 
 function App() {
+
+  useEffect(()=>{
+      window.recaptchaVerifier = new RecaptchaVerifier('recaptcha-container', {
+        'size': 'invisible',
+      }, auth);
+  },[])
+
   return (
     <>
    
       <Header />
+      <Toaster/>
+      <div id="recaptcha-container"></div>
       <Routes>
         <Route path="/" element={<HomePage/>}/>
 
